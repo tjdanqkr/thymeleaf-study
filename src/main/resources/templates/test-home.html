@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <p>Hello ThymeLeaf</p>
+    <h1> 2 가지 출력 법</h1>
+    <hr/>
+    <p th:text="${text}"></p>
+    <p>[[${person.name}]]</p>
+    <p th:text="${person.name}"></p>
+    <h1>반복문</h1>
+    <hr/>
+    <ul th:each="one : ${people}">
+        <li th:text="${one.age}"></li>
+        <li th:text="${one.name}"></li>
+    </ul>
+    <h1>자바스크립트</h1>
+    <script th:inline="javascript">
+        const data = [[${people}]];
+        console.log(data);
+    </script>
+    <h1>조건문</h1>
+    <hr/>
+    <div th:if="${true}">
+        <p>참</p>
+    </div>
+    <div th:unless="${true}">
+        <p>거짓</p>
+    </div>
+    <div th:each="ifone:${people}" th:if="${ifone.age > 22}">
+        <p th:text="${ifone.name}"></p>
+
+    </div>
+    <h1>URL</h1>
+    <hr/>
+    <a th:href="@{/hello}">hello</a>
+
+    <h1>폼</h1>
+    <hr/>
+    <form th:action="@{/test}" method="post">
+        <input type="text" name="name"/>
+        <input type="text" name="age"/>
+        <button type="submit">전송</button>
+    </form>
+    <h1>템플릿</h1>
+    <hr/>
+    <div th:replace="~{/fragments/header}"></div>
+
+    <h1>스토리지</h1>
+    <hr/>
+    <p th:text="${session.get('test')}"></p>
+
+</body>
+</html>
